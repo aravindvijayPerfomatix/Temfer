@@ -1,12 +1,12 @@
 import 'dart:async';
 
 import 'package:Temfer/constants/app_constants.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:Temfer/screens/home_screen.dart';
 import 'package:Temfer/theme/theme.dart';
 import 'package:Temfer/widgets/dot_loader.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -21,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void _navigateToPage() {
     Navigator.pushReplacement(
-         context, MaterialPageRoute(builder: (context) => HomeScreen()));
+        context, MaterialPageRoute(builder: (context) => HomeScreen()));
   }
 
   @override
@@ -43,8 +43,10 @@ class _SplashScreenState extends State<SplashScreen> {
                     size: 50,
                     color: Colors.white70,
                   ),*/
-                  Image.asset("images/hot.png",height: 90,
-                  width: 90,
+                  Image.asset(
+                    "images/hot.png",
+                    height: 90,
+                    width: 90,
                   ),
                   SizedBox(
                     height: 30,
@@ -81,6 +83,9 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
     _startTimer();
   }
 }

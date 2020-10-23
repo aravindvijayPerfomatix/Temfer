@@ -11,6 +11,7 @@ import 'package:Temfer/widgets/dot_loader.dart';
 import 'package:Temfer/widgets/login_background_painter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
@@ -31,10 +32,10 @@ class _HomeScreenState extends State<HomeScreen> {
     return Timer(_duration, _incrementHeight);
   }
 
-  _startWeatherUpdateTimer() async {
+/*  _startWeatherUpdateTimer() async {
     var _duration = Duration(minutes: 30);
     return Timer(_duration, WeatherRepo().fetchWeather);
-  }
+  }*/
 
   _incrementHeight() {
     setState(() {
@@ -51,14 +52,17 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
     _getCurrentLocation();
     futureWeather = WeatherRepo().fetchWeather();
     _startAnimationTimer();
   }
 
   _getCurrentLocation() async {
-    Position position =
-        await getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.best);
     print("Position :::: ${position.latitude}");
     print("Position :::: ${position.longitude}");
   }
@@ -149,7 +153,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               height: 60,
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(left: 0.0, top: 15),
+                              padding:
+                                  const EdgeInsets.only(left: 0.0, top: 15),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -169,7 +174,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),*/
                                   (snapshot.data != null)
                                       ? Text(
-                                          "${((snapshot.data.main.temp) -  kelvinConst).round()}°C",
+                                          "${((snapshot.data.main.temp) - kelvinConst).round()}°C",
                                           style: weatherText,
                                         )
                                       : Text(
@@ -248,7 +253,7 @@ class _HomeScreenState extends State<HomeScreen> {
       floatingActionButton: Padding(
         padding: const EdgeInsets.only(bottom: 50.0, right: 30),
         child: FloatingActionButton(
-          heroTag:  searchLocationHeroTag,
+          heroTag: searchLocationHeroTag,
           elevation: 4,
           onPressed: _navigateToPage,
           child: Icon(

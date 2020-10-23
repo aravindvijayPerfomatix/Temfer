@@ -16,8 +16,6 @@ import 'package:flutter/material.dart';
 }*/
 
 class SearchBar extends StatefulWidget {
-
-
 /*  String searchText ;
 
   SearchBar(this.searchText);*/
@@ -27,14 +25,10 @@ class SearchBar extends StatefulWidget {
 }
 
 class _SearchBarState extends State<SearchBar> {
-
-
-
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:
-      const EdgeInsets.only(right: 20,left: 20),
+      padding: const EdgeInsets.only(right: 20, left: 20),
       child: Material(
         elevation: 2,
         borderRadius: BorderRadius.circular(35),
@@ -46,17 +40,15 @@ class _SearchBarState extends State<SearchBar> {
             decoration: InputDecoration(
                 border: InputBorder.none,
                 hintText: "Location",
-                contentPadding: EdgeInsets.symmetric(
-                    horizontal: 16, vertical: 15),
+                contentPadding:
+                    EdgeInsets.symmetric(horizontal: 16, vertical: 15),
                 suffixIcon: Padding(
                   padding: const EdgeInsets.all(5.0),
                   child: Material(
                     color: Colors.white,
-                    elevation:1,
-                    child:
-                    Icon(Icons.search),
-                    borderRadius:
-                    BorderRadius.circular(35),
+                    elevation: 1,
+                    child: Icon(Icons.search),
+                    borderRadius: BorderRadius.circular(35),
                     textStyle: feelsLikeText,
                   ),
                 )),
@@ -66,6 +58,3 @@ class _SearchBarState extends State<SearchBar> {
     );
   }
 }
-
-
-
